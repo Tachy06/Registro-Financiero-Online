@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block title %} <title>Register Card</title> {% endblock %}
+</head>
+<body>
+    <style>
+        /* Estilo para ocultar los botones de incremento y decremento en Chrome, Safari y Edge */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+    
+        /* Estilo para ocultar los botones de incremento y decremento en Firefox */
+        input[type="number"] {
+        -moz-appearance: textfield;
+        }
+    </style>
+    <section class="main">
+        <h1>Banco<br>San Carlos</h1>
+        <div class="containerRegisterCard">
+            <h1 style="color: black;">Registrar Tarjeta</h1>
+            <form action="{% url 'RegisterCard' usuario=request.user %}" method="POST"> {% csrf_token %}
+                <div class="mb-3">
+                    {% for field in form %}
+                        {% if field.label == 'Número de tarjeta' %}
+                            <label style="margin-bottom: 15px; margin-left: 90px;">{{ field.label }}</label>
+                            <img src="{% static 'images/Mastercard.png' %}" alt="Mastercard" style="width: 29px; height: 24px; margin-left: 20px;">
+                            <img src="{% static 'images/visa.png' %}" alt="Mastercard" style="width: 28px; height: 13px;">
+                            {{ field }}
+                        {% else %}
+                            <p>{{ field.label }}</p>
+                            {{ field }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <button class="btn btn-primary">Registrar tarjeta</button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

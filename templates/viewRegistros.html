@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} <title>Mi registro</title> {% endblock %}
+{% block content %}
+<section class="registro">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert" style="margin-bottom: 0px;">
+                <p style="font-size: 17px; font-weight: bold;">{{ message }}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="container_data">
+        <div class="data">
+            <div class="text">
+                <h1 style="margin-top: 16px;">Mis movimientos</h1>
+                {% for register in registers %}
+                    <p>Cantidad: <span class="movimientos">₡{{ register.monto }}</span></p>
+                    <p>Porque el gasto: <span class="movimientos">{{ register.gasto }}</span></p>
+                    <p>Tipo de transacción: <span class="movimientos">{{ register.transaccion }}</span></p>
+                    <p>Fecha de emisión: <span class="movimientos">{{ register.fecha }}</span></p>
+                    <p>----------------------------------------------------</p>
+                {% endfor %}
+                <p>Presupuesto actual: <span style="font-weight: bold;">{{ presupuesto }}</span></p>
+            </div>
+            <div class="image">
+                <img src="{% static 'images/finanzas.png' %}" alt="" class="imgMovimientos">
+            </div>
+        </div>
+        <div class="grafico">
+            <h3>Gráfico de Datos</h3>
+            <div class="imgGrafico">{{ plot | safe }}</div>
+        </div>
+    </div>
+</section>
+{% endblock %}

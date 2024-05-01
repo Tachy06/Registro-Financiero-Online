@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} <title>Crear presupuesto</title> {% endblock %}
+{% block content %}
+<section class="registro">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert" style="margin-bottom: 0px;">
+                <p style="font-size: 17px; font-weight: bold;">{{ message }}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <h1 style="margin-top: 16px;">Carga tu presupuesto</h1>
+    <div class="container">
+        <div class="container_registro">
+            <form action="" method="post"> {% csrf_token %}
+                <label for="presupuesto">Presupuesto</label>
+                <input type="number" class="form-control" id="presupuesto" name="presupuesto">
+                <button type="submit" class="btn btn-success" style="margin: 15px;">Carga tu presupuesto</button>
+            </form>
+        </div>
+        <div class="image">
+            <img src="{% static 'images/presupuesto.png' %}" alt="" style="margin-top: 20px;">
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} <title>Perfil</title> {% endblock %}
+{% block content %}
+<main class="other_pages">
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert" style="margin-bottom: 0px;">
+                    <p style="font-size: 17px; font-weight: bold;">{{ message }}</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="mb-3">
+            <h3>Usuario</h3>
+            <p>{{usuario.username}}</p>
+        </div>
+        <div class="mb-3">
+            <h3>Email</h3>
+            <p>{{usuario.email}}</p>
+        </div>
+        <div class="mb-3">
+            <h3>Cambiar contraseña</h3>
+            <p>Si quieres cambiar la contraseña haz click <a href="{% url 'Change_Password' %}" style="text-decoration: none;">aquí</a></p>
+        </div>
+        {% for card in cards %}
+            <div class="credit-card">
+                <div class="card">
+                    <div class="front">
+                        <div class="chip"></div>
+                        <div class="card-number">
+                            {% for digit in card.card|slice:":16" %}
+                                <span style="padding-right: -10px;">{{ digit }}</span>
+                                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                                    &nbsp;  <!-- Agrega un espacio después de cada 4 dígitos, excluyendo el último dígito -->
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="card-info">
+                            <div class="card-expiration">
+                                <label>Fecha de expiración</label>
+                                <div>{{ card.fecha|date:"F j, Y" }}</div>
+                            </div>
+                            <div class="card-holder">
+                                <label>Titular de la tarjeta</label>
+                                <div>{{ card.usuario.nombre}} {{ card.usuario.apellido}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="rayas"></div>
+                        <div class="rayas"></div>
+                        <div class="rayas"></div>
+                        <div class="cvv">
+                            <label>CVV</label>
+                            <div>{{ card.cvv }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

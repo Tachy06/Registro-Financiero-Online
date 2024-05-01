@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} <title>Crear mi registro</title> {% endblock %}
+{% block content %}
+<main class="registro">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert" style="margin-bottom: 0px;">
+                <p style="font-size: 17px; font-weight: bold;">{{ message }}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <h1 style="margin: 20px 0px;">Realiza un registro sin presupuesto</h1>
+    <div class="container">
+        <div class="container_registro">
+            <form action="" method="post">{% csrf_token %}
+                <div class="mb-3">
+                    <div class="form-check form-check-inline">
+                        <label for="radioEfectivo">Tipo de gasto</label>
+                        <br>
+                        <input type="radio" name="tipo" id="radioEfectivo" value="Efectivo" class="form-check-input" style="margin-left: 3px;" checked>
+                        <label class="form-check-label" for="radioEfectivo" class="form-check-label" style="position: relative; bottom: 4px;">
+                            Efectivo
+                        </label>
+                    </div>
+                    <br>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" name="tipo" id="radioTarjeta" value="Tarjeta" class="form-check-input">
+                        <label class="form-check-label" for="radioTarjeta" class="form-check-label" style="position: relative; bottom: 4px;">
+                            Tarjeta
+                        </label>
+                    </div>
+                    <br>
+                    <label for="cantidad">Cantidad gastado</label>
+                    <input type="number" name="cantidad" id="cantidad" class="form-control" required>
+                    <label for="gasto">En que se gastó</label>
+                    <input type="text" name="gasto" id="gasto" class="form-control" required>
+                    <label for="fecha">Fecha del gasto</label>
+                    <input type="date" name="fecha" id="fecha" class="form-control" required min="" max="">
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-success btn-registro">Crear registro</button>
+                </div>
+            </form>
+        </div>
+        <div class="image">
+            <img src="https://assets-global.website-files.com/5c4ba48132b5c622a3e9c186/5ee95b79a597d357f469899f_Imagenesebook-15.png" alt="">
+        </div>
+    </div>
+</main>
+{% endblock %}

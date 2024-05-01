@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} <title>Banco San Carlos</title> {% endblock %}
+{% block content %}
+<main class="registro">
+    <div class="container_data">
+        <div class="data">
+            <div class="text">
+                <h1 style="margin-top: 16px;">Mis movimientos</h1>
+                {% for register in registers %}
+                    {% if not register %}
+                        <h2>No hay datos guardados</h2>
+                    {% else %}
+                        <p>Cantidad: <span class="movimientos">₡{{ register.monto }}</span></p>
+                        <p>Porque el gasto: <span class="movimientos">{{ register.gasto }}</span></p>
+                        <p>Tipo de transacción: <span class="movimientos">{{ register.transaccion }}</span></p>
+                        <p>Fecha de emisión: <span class="movimientos">{{ register.fecha }}</span></p>
+                        <p>----------------------------------------------------</p>
+                    {% endif %}
+                {% endfor %}
+                <p>Total gastado: <span class="movimientos">₡{{suma}}</span></p>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

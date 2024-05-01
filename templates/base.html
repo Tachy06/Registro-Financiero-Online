@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block title %} <title>Banco San Carlos</title> {% endblock %}
+</head>
+<body>
+    <style>
+        /* Estilo para ocultar los botones de incremento y decremento en Chrome, Safari y Edge */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    
+        /* Estilo para ocultar los botones de incremento y decremento en Firefox */
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
+    {% if request.user.is_authenticated %}
+    <header>
+        <div class="container">
+            <a href="/">Bienvenido a Registro <span class="san">Financiero</span> <span class="carlos">online</span></a>
+        </div>
+    </header>
+    <nav class="navbar navbar-expand-lg">
+		<div class="container" data-aos="fade-down" data-aos-duration="1500">
+			<a href="/" class="navbar-brand">Registro <span class="san" style="padding: 0px 5px;">Financiero </span><span class="carlos">online</span></a>
+			<button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="{% url 'Presupuesto' %}" class="nav-link">Crear Presupuesto</a>
+                    </li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'Registro_financiero' %}">Crear Registro</a>
+					</li>
+                    <li class="nav-item">
+                        <a href="{% url 'Mis_Registros' %}" class="nav-link">Ver Registro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'Create Registro_Sin_Presupuesto' %}" class="nav-link">Crear Registro Sin Presupuesto</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="switch-container">
+                            <label class="switch" id="toggle-label" for="fondoSwitch">
+                                <input type="checkbox" id="fondoSwitch">
+                                <span class="slider round">
+                                    <span class="icon" id="solIcon">&#9728;</span> <!-- Icono del sol -->
+                                    <span class="icon" id="lunaIcon">&#127769;</span> <!-- Icono de la luna -->
+                                </span>
+                            </label>
+                        </div>
+                    </li>
+                    <div class="dropdown">
+                        <div class="content">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="position: relative; left: 60px;">Ver perfil</button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="padding: 6px;">
+                                <li><a href="{% url 'Profile' %}" class="dropdown-item">{{user.username}}</a></li>
+                                <li><a href="{% url 'Logout' %}" class="dropdown-item">Cerrar Sesión</a></li>
+                            </ul>
+                        </div>
+                    </div>
+				</ul>
+			</div>
+		</div>
+	</nav>
+    {% else %}
+        <button class="btn btn-success"><a href="{% url 'Login' %}">Iniciar Sesión</a></button>
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+    <footer>
+    </footer>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script> 
+	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+    AOS.init({
+        duration: 2000,
+        once: true,
+    });
+    </script>
+    <script src="{% static 'js/calcularFecha.js' %}"></script>
+</body>
+</html>

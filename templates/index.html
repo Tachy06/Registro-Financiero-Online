@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} <title>Banco San Carlos</title> {% endblock %}
+{% block content %}
+<main class="index">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert" style="margin-bottom: 0px;">
+                <p style="font-size: 17px; font-weight: bold;">{{ message }}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <section class="introduction">
+        <div class="container">
+            <div class="text">
+                <h1>Lleva todo tu registro financiero aquí</h1>
+                <p>La mejor web App para llevar tu control financiero</p>
+                <p>Accede desde donde quieras, cuando quieras y como quieras</p>
+                <p>Crea tu primer movimiento <span><a href="{% url 'Registro_financiero' %}">aquí</a></span></p>
+                <p>Y si ya tienes registro miralos acá👇</p>
+                <a href="{% url 'Mis_Registros' %}" style="text-decoration: none; color: rgb(255, 255, 255);"><button type="submit" class="btn btn-danger" style="margin-bottom: 16px;">Mira tus movimientos</button></a>
+            </div>
+            <div class="image">
+                <img src="{% static 'images/dinero.png' %}" alt="dinero" class="img">
+            </div>
+        </div>
+    </section>
+    <section class="introduction" style="margin-top: 50px; margin-bottom: 20px;">
+        <div class="container">
+            <div class="image">
+                <img src="{% static 'images/presupuesto.png' %}" alt="presupuesto" class="img">
+            </div>
+            <div class="text">
+                <h1>Haz tu propio presupuesto</h1>
+                <p>Si quieres llevar un control de cuantos puedes gastar</p>
+                <p>registralo aquí y lleva tu propio orden👇</p>
+                <a href="{% url 'Presupuesto' %}"><button type="submit" class="btn btn-danger">Lleva tu orden</button></a>
+            </div>
+        </div>
+    </section>
+    <section class="introduction" style="margin-top: 50px; margin-bottom: 20px;">
+        <div class="container">
+            <div class="text">
+                <h1>Control de presupuesto</h1>
+                <p>Mira como tener un mejor control de tu presupuesto con estos consejos de libros y videos 
+                    recomendados por los mejores inversionistas
+                </p>
+                <a href="{% url 'Books' %}"><Button type="submit" class="btn btn-danger">Miralo aquí</Button></a>
+            </div>
+            <div class="image">
+                <img src="{% static 'images/consejos.jpg' %}" alt="" style="margin-left: 16px;" class="img-consejos">
+            </div>
+        </div>
+    </section>
+    <section class="introduction sin-presupuesto">
+        <div class="container">
+            <div class="image">
+                <img src="{% static 'images/control-financiero.jpg' %}" alt="control-financiero" class="img-control">
+            </div>
+            <div class="text">
+                <h1>Controla tus finanzas sin presupuesto</h1>
+                <p>Si no tienes un presupuesto mensual y de igual manera quieres poder tener control sobre lo que gastas
+                    puedes hacerlo. Da click en el botón
+                </p>
+                <a href="{% url 'Registro_Sin_Presupuesto' %}"><button type="submit" class="btn btn-danger">Ver Mis Registros Sin Presupuesto</button></a>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
